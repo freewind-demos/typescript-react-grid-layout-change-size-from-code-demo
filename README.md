@@ -1,7 +1,7 @@
-TypeScript React Grid Layout Demo
-=================================
+TypeScript React Grid Layout Change Size From Code Demo
+=======================================================
 
-使用`react-grid-layout`来布局，功能非常强大。
+在代码中改变layout的size
 
 ```
 npm install

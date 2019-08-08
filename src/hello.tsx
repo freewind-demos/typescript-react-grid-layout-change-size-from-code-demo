@@ -1,26 +1,45 @@
-//import * as React from 'react'
-import React from 'react'
+import React, {useState} from 'react';
 import GridLayout, {Layout} from 'react-grid-layout';
 
 import 'react-grid-layout/css/styles.css';
 import './index.css';
 
-class Hello extends React.Component {
-  render() {
-    const layout: Layout[] = [
-      {i: 'a', x: 0, y: 0, w: 1, h: 2, static: true},
-      {i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4},
-      {i: 'c', x: 4, y: 0, w: 1, h: 2},
-    ]
-    return <div>
-      <h1>Hello React</h1>
-      <GridLayout className='layout' layout={layout} cols={12} rowHeight={30} width={1200}>
-        <div key='a'>A</div>
-        <div key='b'>B</div>
-        <div key='c'>C</div>
-      </GridLayout>
-    </div>
-  }
-}
+export default function Hello() {
+  const [layout, setLayout] = useState<Layout[]>([
+    {i: 'a', x: 0, y: 0, w: 3, h: 3},
+    {i: 'b', x: 0, y: 1, w: 1, h: 1},
+  ]);
 
-export default Hello
+  function changeWidth(n: number) {
+    const [a, b] = layout;
+    setLayout([{...a, w: a.w + n}, b]);
+  }
+
+  function changeHeight(n: number) {
+    const [a, b] = layout;
+    setLayout([{...a, h: a.h + n}, b]);
+  }
+
+  return <div>
+    <h1>Hello React-Grid-Layout</h1>
+    <GridLayout className='layout' layout={layout}
+                cols={8} rowHeight={30} width={1200}>
+      <div key='a'>
+        A
+        <div>
+          <div>
+            Width:
+            <button onClick={() => changeWidth(1)}>+</button>
+            <button onClick={() => changeWidth(-1)}>-</button>
+          </div>
+          <div>
+            Height:
+            <button onClick={() => changeHeight(1)}>+</button>
+            <button onClick={() => changeHeight(-1)}>-</button>
+          </div>
+        </div>
+      </div>
+      <div key='b'>B</div>
+    </GridLayout>
+  </div>;
+}
